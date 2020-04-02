@@ -20,17 +20,22 @@ jQuery(document).ready(function ($) {
 	});
 
 
-	$( 'ul#menu-to-edit > li' ).each( function(){
-		var id = $(this).attr('id').substr(10);
-		var template_content = template({
-			menuItemID: id,
-			restriction_data: um_menu_restriction_data[ id ]
-		});
+	/**
+	 * The variable um_menu_restriction_data appears if $wp_version < '5.4'
+	 */
+	if( typeof( um_menu_restriction_data ) === 'object' ){
+		$( 'ul#menu-to-edit > li' ).each( function(){
+			var id = $(this).attr('id').substr(10);
+			var template_content = template({
+				menuItemID: id,
+				restriction_data: um_menu_restriction_data[ id ]
+			});
 
-		if ( $( this ).find( 'fieldset.field-move' ).length > 0 ) {
-			$( this ).find( 'fieldset.field-move' ).before( template_content );
-		} else {
-			$( this ).find( '.menu-item-actions' ).before( template_content );
-		}
-	});
+			if ( $( this ).find( 'fieldset.field-move' ).length > 0 ) {
+				$( this ).find( 'fieldset.field-move' ).before( template_content );
+			} else {
+				$( this ).find( '.menu-item-actions' ).before( template_content );
+			}
+		});
+	}
 });
