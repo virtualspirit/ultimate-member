@@ -80,8 +80,8 @@
 	font-weight: bold;
 }
 
-.um-nav-mode {margin-top:10px}
-.um-nav-roles {display: none;margin-top:5px}
+.um-nav-edit .um-nav-mode {margin-top:10px; max-width:100%;}
+.um-nav-edit .um-nav-roles {display:none; margin-top:5px; max-width:100%;}
 
 /*
 	- jQuery Tooltips
