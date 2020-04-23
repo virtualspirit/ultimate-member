@@ -214,6 +214,7 @@ if ( !class_exists( 'um\admin\core\Admin_Navmenu' ) ) {
 		public function get_restriction_data( $item_id ) {
 			if ( empty( self::$roles ) ) {
 				self::$roles = UM()->roles()->get_roles( false, array( 'administrator' ) );
+				asort( self::$roles );
 			}
 
 			if ( empty( self::$restriction_data[$item_id] ) ) {
@@ -260,46 +261,36 @@ if ( !class_exists( 'um\admin\core\Admin_Navmenu' ) ) {
 				'um_nav_roles_all' => self::$roles,
 				'um_nav_columns'   => 2
 					), $restriction_data ) );
+
+			$colWidth = floor( 100 / max( array( 1, $um_nav_columns ) ) );
 			?>
 			<div class="um-nav-edit" data-menu_item_id="<?php echo esc_attr( $item_id ); ?>">
 				<div class="clear"></div>
 				<h4 style="margin-bottom: 0.6em;"><?php _e( "Ultimate Member Menu Settings", 'ultimate-member' ) ?></h4>
 
 				<p class="description description-wide um-nav-mode">
-				<label for="edit-menu-item-um_nav_public-<?php echo esc_attr( $item_id ); ?>">
-					<?php _e( "Who can see this menu link?", 'ultimate-member' ); ?><br/>
-					<select id="edit-menu-item-um_nav_public-<?php echo esc_attr( $item_id ); ?>" name="menu-item-um_nav_public[<?php echo esc_attr( $item_id ); ?>]" style="width:100%;">
-						<option value="0" <?php selected( $um_nav_public, 0 ); ?>><?php _e( 'Everyone', 'ultimate-member' ) ?></option>
-						<option value="1" <?php selected( $um_nav_public, 1 ); ?>><?php _e( 'Logged Out Users', 'ultimate-member' ) ?></option>
-						<option value="2" <?php selected( $um_nav_public, 2 ); ?>><?php _e( 'Logged In Users', 'ultimate-member' ) ?></option>
-					</select>
-				</label>
-			</p>
+					<label for="edit-menu-item-um_nav_public-<?php echo esc_attr( $item_id ); ?>">
+						<?php _e( "Who can see this menu link?", 'ultimate-member' ); ?><br/>
+						<select id="edit-menu-item-um_nav_public-<?php echo esc_attr( $item_id ); ?>" name="menu-item-um_nav_public[<?php echo esc_attr( $item_id ); ?>]" style="width:100%;">
+							<option value="0" <?php selected( $um_nav_public, 0 ); ?>><?php _e( 'Everyone', 'ultimate-member' ) ?></option>
+							<option value="1" <?php selected( $um_nav_public, 1 ); ?>><?php _e( 'Logged Out Users', 'ultimate-member' ) ?></option>
+							<option value="2" <?php selected( $um_nav_public, 2 ); ?>><?php _e( 'Logged In Users', 'ultimate-member' ) ?></option>
+						</select>
+					</label>
+				</p>
 
-			<p class="description description-wide um-nav-roles" <?php echo $um_nav_public == 2 ? 'style="display: block;"' : ''; ?>><?php _e( "Select the member roles that can see this link", 'ultimate-member' ) ?><br>
+				<p class="description description-wide um-nav-roles" <?php echo $um_nav_public == 2 ? 'style="display: block;"' : ''; ?>><?php _e( "Select the member roles that can see this link", 'ultimate-member' ) ?><br>
 
 				<?php
-				$i = 0;
 				$html = '';
-				$per_page = ceil( count( $um_nav_roles_all ) / $um_nav_columns );
-				while ( $i < $um_nav_columns ) {
-					$section_fields_per_page = array_slice( $um_nav_roles_all, $i * $per_page, $per_page );
-					$html .= '<span class="um-form-fields-section" style="width:' . floor( 100 / $um_nav_columns ) . '% !important;">';
-
-					foreach ( $section_fields_per_page as $k => $title ) {
-						$id_attr = ' id="edit-menu-item-um_nav_roles-' . $item_id . '_' . $k . '" ';
-						$for_attr = ' for="edit-menu-item-um_nav_roles-' . $item_id . '_' . $k . '" ';
-						$checked_attr = checked( in_array( $k, $um_nav_roles ), true, false );
-						$html .= "<label {$for_attr}> <input type='checkbox' {$id_attr} name='menu-item-um_nav_roles[{$item_id}][{$k}]' value='1' {$checked_attr} /> <span>{$title}</span> </label>";
-					}
-
-					$html .= '</span>';
-					$i++;
+				foreach ( $um_nav_roles_all as $k => $title ) {
+					$checked_attr = checked( in_array( $k, $um_nav_roles ), true, false );
+					$html .= "<label style=\"float:left; width:{$colWidth}%;\" for=\"edit-menu-item-um_nav_roles-{$item_id}_{$k}\" > <input type='checkbox' id=\"edit-menu-item-um_nav_roles-{$item_id}_{$k}\" name='menu-item-um_nav_roles[{$item_id}][{$k}]' value='1' {$checked_attr} /> <span>{$title}</span> </label>";
 				}
 				echo $html;
 				?>
-			</p>
-			<div class="clear"></div>
+
+				</p>
 			</div>
 			<?php
 		}
