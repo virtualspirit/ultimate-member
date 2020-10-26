@@ -602,16 +602,21 @@ if ( ! class_exists( 'um\admin\core\Admin_Notices' ) ) {
 		 */
 		function reviews_notice() {
 
+			$is_dismissed = get_option( 'um_hidden_admin_notices' );
+
+			if( isset( $is_dismissed['reviews_notice'] ) ) return;
+
 			$first_activation_date = get_option( 'um_first_activation_date', false );
 
 			if ( empty( $first_activation_date ) ) {
 				return;
 			}
 
-			if ( $first_activation_date + 2*WEEK_IN_SECONDS > time() ) {
+			if ( ( $first_activation_date + ( 2 * WEEK_IN_SECONDS ) ) > time() ) {
 				return;
 			}
 
+ 
 			ob_start(); ?>
 
 			<div id="um_start_review_notice">
