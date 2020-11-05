@@ -35,6 +35,41 @@ if ( ! class_exists( 'um\admin\core\Admin_Builder' ) ) {
 
 
 		/**
+		 * Create an unique meta key
+		 *
+		 * @since  2.1.13  [2020-11-05]
+		 *
+		 * @param  string  $field_type  The field type
+		 * @param  int     $form_id     The ID of the form
+		 *
+		 * @return string|false
+		 */
+		public function create_metakey( $field_type, $form_id ) {
+
+			$fields = UM()->query()->get_attr( 'custom_fields', $form_id );
+			if ( empty( $fields ) ) {
+				$form = get_post( $form_id );
+				if ( empty( $form ) || $form->post_type !== 'um-form' ) {
+					return false;
+				} else {
+					$fields = array();
+				}
+			}
+
+			$count = count( $fields );
+			do {
+				$count++;
+				$metakey = "um_{$field_type}_{$form_id}_{$count}";
+				if( $count > 999 ){
+					break;
+				}
+			} while ( isset( $fields[$metakey] ) );
+
+			return $metakey;
+		}
+
+
+		/**
 		 * Apply a filter to handle errors for field updating in backend
 		 *
 		 * @param $errors
@@ -131,7 +166,7 @@ if ( ! class_exists( 'um\admin\core\Admin_Builder' ) ) {
 
 			// set unique meta key
 			if ( in_array( $field_type, $fields_without_metakey ) && ! isset( $array['post']['_metakey'] ) ) {
-				$array['post']['_metakey'] = "um_{$field_type}_{$form_id}_{$count}";
+				$array['post']['_metakey'] = $this->create_metakey( $field_type, $form_id );
 			}
 
 			// set position

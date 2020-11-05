@@ -343,7 +343,12 @@ if ( ! class_exists( 'um\core\Fields' ) ) {
 
 			$duplicate = $fields[ $id ];
 
-			$new_metakey = $id . "_" . $inc;
+			if( isset( $duplicate['type'] ) ){
+				$new_metakey = UM()->builder()->create_metakey( $duplicate['type'], $form_id );
+			} else{
+				$new_metakey = $id . "_" . $inc;
+			}
+
 			$new_title = $fields[ $id ]['title'] . " #" . $inc;
 			$new_position = $inc;
 
