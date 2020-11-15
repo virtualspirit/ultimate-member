@@ -59,7 +59,7 @@ if ( ! class_exists( 'um\core\Access' ) ) {
 			add_filter( 'get_pages', array( &$this, 'filter_protected_posts' ), 99, 2 );
 			//filter menu items
 			add_filter( 'wp_nav_menu_objects', array( &$this, 'filter_menu' ), 99, 2 );
-			
+
 			//filter attachment
 			add_filter( 'wp_get_attachment_url', array( &$this, 'filter_attachment' ), 99, 2 );
 			add_filter( 'has_post_thumbnail', array( &$this, 'filter_post_thumbnail' ), 99, 3 );
@@ -1155,8 +1155,8 @@ if ( ! class_exists( 'um\core\Access' ) ) {
 			$cache_number[ $post_id ] = $count;
 			return $count;
 		}
-		
-		
+
+
 		/**
 		 * Is post restricted?
 		 *
@@ -1394,6 +1394,9 @@ if ( ! class_exists( 'um\core\Access' ) ) {
 							}
 						}
 					} else {
+						$display = true;
+
+						// What roles can access this content?
 						if ( ! empty( $block['attrs']['um_roles_access'] ) ) {
 							$display = false;
 							foreach ( $block['attrs']['um_roles_access'] as $role ) {
@@ -1401,15 +1404,21 @@ if ( ! class_exists( 'um\core\Access' ) ) {
 									$display = true;
 								}
 							}
+						}
 
-							if ( ! $display ) {
-								$block_content = '';
-								if ( isset( $block['attrs']['um_message_type'] ) ) {
-									if ( $block['attrs']['um_message_type'] == '1' ) {
-										$block_content = $default_message;
-									} elseif ( $block['attrs']['um_message_type'] == '2' ) {
-										$block_content = $block['attrs']['um_message_content'];
-									}
+						// Lock to verified accounts only
+						if ( ! empty( $block['attrs']['um_locked_to_verified'] ) && defined( 'um_verified_users_version' ) ) {
+							$is_verified = UM()->Verified_Users_API()->api()->is_verified( get_current_user_id() );
+							$display = $display && $is_verified;
+						}
+
+						if ( ! $display ) {
+							$block_content = '';
+							if ( isset( $block['attrs']['um_message_type'] ) ) {
+								if ( $block['attrs']['um_message_type'] == '1' ) {
+									$block_content = $default_message;
+								} elseif ( $block['attrs']['um_message_type'] == '2' ) {
+									$block_content = $block['attrs']['um_message_content'];
 								}
 							}
 						}

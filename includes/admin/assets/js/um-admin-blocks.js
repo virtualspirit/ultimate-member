@@ -16,7 +16,8 @@ var um_block_restriction = wp.compose.createHigherOrderComponent( function( Bloc
 		um_who_access:'um_block_settings_hide',
 		um_roles_access:'um_block_settings_hide',
 		um_message_type:'um_block_settings_hide',
-		um_message_content:'um_block_settings_hide'
+		um_message_content:'um_block_settings_hide',
+		um_locked_to_verified:'um_block_settings_hide'
 	};
 
 	return function( props ) {
@@ -26,6 +27,7 @@ var um_block_restriction = wp.compose.createHigherOrderComponent( function( Bloc
 			um_condition_fields['um_roles_access'] = 'um_block_settings_hide';
 			um_condition_fields['um_message_type'] = 'um_block_settings_hide';
 			um_condition_fields['um_message_content'] = 'um_block_settings_hide';
+			um_condition_fields['um_locked_to_verified'] = 'um_block_settings_hide';
 		} else {
 			um_condition_fields['um_who_access'] = '';
 
@@ -33,9 +35,12 @@ var um_block_restriction = wp.compose.createHigherOrderComponent( function( Bloc
 				um_condition_fields['um_roles_access'] = 'um_block_settings_hide';
 				um_condition_fields['um_message_type'] = 'um_block_settings_hide';
 				um_condition_fields['um_message_content'] = 'um_block_settings_hide';
+				um_condition_fields['um_locked_to_verified'] = 'um_block_settings_hide';
+
 			} else if ( parseInt( props.attributes.um_who_access ) === 1  ) {
 				um_condition_fields['um_roles_access'] = '';
 				um_condition_fields['um_message_type'] = '';
+				um_condition_fields['um_locked_to_verified'] = '';
 
 				if ( parseInt( props.attributes.um_message_type ) === 2 ) {
 					um_condition_fields['um_message_content'] = '';
@@ -44,6 +49,7 @@ var um_block_restriction = wp.compose.createHigherOrderComponent( function( Bloc
 				}
 			} else {
 				um_condition_fields['um_message_type'] = '';
+				um_condition_fields['um_locked_to_verified'] = '';
 
 				if ( parseInt( props.attributes.um_message_type ) === 2 ) {
 					um_condition_fields['um_message_content'] = '';
@@ -77,6 +83,7 @@ var um_block_restriction = wp.compose.createHigherOrderComponent( function( Bloc
 									um_condition_fields['um_roles_access'] = 'um_block_settings_hide';
 									um_condition_fields['um_message_type'] = 'um_block_settings_hide';
 									um_condition_fields['um_message_content'] = 'um_block_settings_hide';
+									um_condition_fields['um_locked_to_verified'] = 'um_block_settings_hide';
 								} else {
 									um_condition_fields['um_who_access'] = '';
 								}
@@ -107,15 +114,18 @@ var um_block_restriction = wp.compose.createHigherOrderComponent( function( Bloc
 							onChange: function onChange( value ) {
 								props.setAttributes({ um_who_access: value });
 								if ( parseInt( value ) === 0 ) {
+									um_condition_fields['um_roles_access'] = 'um_block_settings_hide';
 									um_condition_fields['um_message_type'] = 'um_block_settings_hide';
 									um_condition_fields['um_message_content'] = 'um_block_settings_hide';
-									um_condition_fields['um_roles_access'] = 'um_block_settings_hide';
+									um_condition_fields['um_locked_to_verified'] = 'um_block_settings_hide';
 								} else if ( parseInt( value ) === 1 ) {
-									um_condition_fields['um_message_type'] = '';
 									um_condition_fields['um_roles_access'] = '';
-								} else {
 									um_condition_fields['um_message_type'] = '';
+									um_condition_fields['um_locked_to_verified'] = '';
+								} else {
 									um_condition_fields['um_roles_access'] = 'um_block_settings_hide';
+									um_condition_fields['um_message_type'] = '';
+									um_condition_fields['um_locked_to_verified'] = 'um_block_settings_hide';
 								}
 							}
 						}
@@ -175,6 +185,17 @@ var um_block_restriction = wp.compose.createHigherOrderComponent( function( Bloc
 								props.setAttributes({ um_message_content: value });
 							}
 						}
+					),
+					um_el(
+						umToggleControl,
+						{
+							label: wp.i18n.__( 'Lock to verified accounts only', 'ultimate-member' ),
+							className: um_condition_fields['um_locked_to_verified'],
+							checked: props.attributes.um_locked_to_verified,
+							onChange: function onChange( value ) {
+								props.setAttributes({ um_locked_to_verified: value });
+							}
+						}
 					)
 				)
 			)
@@ -188,7 +209,7 @@ wp.hooks.addFilter( 'editor.BlockEdit', 'um-block/um_block_restriction', um_bloc
 /**
  * Save Attributes
  *
- * @type {{um_is_restrict: {type: string}, um_who_access: {type: string}, um_message_type: {type: string}, um_message_content: {type: string}}}
+ * @type {{um_is_restrict: {type: string}, um_who_access: {type: string}, um_message_type: {type: string}, um_message_content: {type: string}, um_locked_to_verified: {type: string}}}
  */
 var um_block_restrict_settings = {
 	um_is_restrict: {
@@ -205,6 +226,9 @@ var um_block_restrict_settings = {
 	},
 	um_message_content: {
 		type: "string"
+	},
+	um_locked_to_verified: {
+		type: "boolean"
 	}
 };
 
