@@ -57,14 +57,6 @@ if ( ! class_exists( 'UM' ) ) {
 
 
 		/**
-		 * @var bool Old variable
-		 *
-		 * @todo deprecate this variable
-		 */
-		public $is_filtering;
-
-
-		/**
 		 * WP Native permalinks turned on?
 		 *
 		 * @var
@@ -528,6 +520,12 @@ if ( ! class_exists( 'UM' ) ) {
 		 */
 		public function includes() {
 
+			//disable Gutenberg scripts to avoid the conflicts
+			$disable_script = apply_filters( 'um_disable_blocks_script', false );
+			if ( ! $disable_script ) {
+				$this->blocks();
+			}
+
 			$this->common();
 
 			if ( $this->is_request( 'ajax' ) ) {
@@ -651,6 +649,19 @@ if ( ! class_exists( 'UM' ) ) {
 			}
 
 			return $this->classes[ $key ];
+		}
+
+
+		/**
+		 * @since 3.0
+		 *
+		 * @return bool|um\blocks\Init()
+		 */
+		function blocks() {
+			if ( empty( $this->classes['blocks\init'] ) ) {
+				$this->classes['blocks\init'] = new um\blocks\Init();
+			}
+			return $this->classes['blocks\init'];
 		}
 
 
@@ -811,12 +822,6 @@ if ( ! class_exists( 'UM' ) ) {
 		 * @return bool|um\admin\core\Admin_GDPR()
 		 */
 		function admin_gdpr() {
-			global $wp_version;
-
-			if ( version_compare( $wp_version, '4.9.6', '<' ) ) {
-				return false;
-			}
-
 			if ( empty( $this->classes['admin_gdpr'] ) ) {
 				$this->classes['admin_gdpr'] = new um\admin\core\Admin_GDPR();
 			}
@@ -832,12 +837,6 @@ if ( ! class_exists( 'UM' ) ) {
 		 * @return bool|um\core\GDPR()
 		 */
 		function gdpr() {
-			global $wp_version;
-
-			if ( version_compare( $wp_version, '4.9.6', '<' ) ) {
-				return false;
-			}
-
 			if ( empty( $this->classes['gdpr'] ) ) {
 				$this->classes['gdpr'] = new um\core\GDPR();
 			}
@@ -1352,24 +1351,6 @@ if ( ! class_exists( 'UM' ) ) {
 
 
 		/**
-		 * @deprecated 2.1.0
-		 *
-		 * @since 2.0
-		 *
-		 * @return um\core\Members
-		 */
-		function members() {
-			um_deprecated_function( 'UM()->members()', '2.1.0', 'UM()->member_directory()' );
-
-			if ( empty( $this->classes['members'] ) ) {
-				$this->classes['members'] = new um\core\Members();
-			}
-
-			return $this->classes['members'];
-		}
-
-
-		/**
 		 * @since 2.0
 		 *
 		 * @return um\core\Logout
@@ -1514,7 +1495,3 @@ if ( ! class_exists( 'UM' ) ) {
 function UM() {
 	return UM::instance();
 }
-
-
-// Global for backwards compatibility.
-$GLOBALS['ultimatemember'] = UM();

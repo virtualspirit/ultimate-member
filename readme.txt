@@ -155,6 +155,21 @@ The plugin works with popular caching plugins by automatically excluding Ultimat
 * To learn more about version 2.1 please see this [docs](https://docs.ultimatemember.com/article/1512-upgrade-2-1-0)
 * UM2.1+ is a significant update to the Member Directories' code base from 2.0.x. Please make sure you take a full-site backup with restore point before updating the plugin
 
+= 3.0: xxx, 2021 =
+
+* Deprecated:
+
+  - UM()->is_filtering variable
+  - UM()->members() method is fully removed, since 2.1 there is UM()->member_directory()
+  - Using $GLOBALS['ultimatemember'] for backward compatibility with 1.3.x versions, please use `UM()` method instead of `global $ultimatemember;`
+  - "Enable Gutenberg Blocks" ( `enable_blocks` key ) option is deprecated Ultimate Member Gutenberg blocks are enabled by default
+  - Since UM minimum required version is >= 5.0 checking WP version on displaying `restricted_blocks` and `restricted_block_message` options
+  - Since UM minimum required version is >= 5.0 checking WP version on register and enqueue Gutenberg JS files
+
+* Upgrade pack:
+
+  - remove `enable_blocks` key from UM options (`um_options`)
+
 = 2.1.16: March 10, 2021 =
 
 * Enhancements:

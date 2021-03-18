@@ -453,12 +453,8 @@ if ( ! class_exists( 'um\admin\core\Admin_Settings' ) ) {
 					'type'      => 'wp_editor',
 					'label'     => __( 'Restricted Access Message', 'ultimate-member' ),
 					'tooltip'   => __( 'This is the message shown to users that do not have permission to view the content', 'ultimate-member' ),
-				)
-			);
-
-			global $wp_version;
-			if ( version_compare( $wp_version, '5.0', '>=' ) ) {
-				$access_fields = array_merge( $access_fields, array( array(
+				),
+				array(
 					'id'    => 'restricted_blocks',
 					'type'  => 'checkbox',
 					'label' => __( 'Allow Gutenberg Blocks restriction options', 'ultimate-member' ),
@@ -469,9 +465,7 @@ if ( ! class_exists( 'um\admin\core\Admin_Settings' ) ) {
 					'label'         => __( 'Restricted Block Message', 'ultimate-member' ),
 					'tooltip'       => __( 'This is the message shown to users that do not have permission to view the block\'s content', 'ultimate-member' ),
 					'conditional'   => array( 'restricted_blocks', '=', 1 ),
-				) ) );
-			}
-			$access_fields = array_merge( $access_fields, array(
+				),
 				array(
 					'id'    => 'restricted_access_post_metabox',
 					'type'  => 'hidden',
@@ -501,7 +495,8 @@ if ( ! class_exists( 'um\admin\core\Admin_Settings' ) ) {
 					'columns'   => 3,
 					'value'     => $restricted_access_taxonomy_metabox_value,
 					'default'   => UM()->options()->get_default( 'restricted_access_taxonomy_metabox' ),
-			) ) );
+				),
+			);
 
 			$latest_update = get_option( 'um_member_directory_update_meta', false );
 			$latest_truncate = get_option( 'um_member_directory_truncated', false );
@@ -1333,12 +1328,6 @@ if ( ! class_exists( 'um\admin\core\Admin_Settings' ) ) {
 							'type'      => 'checkbox',
 							'label'     => __( 'Disable Cache User Profile', 'ultimate-member' ),
 							'tooltip'   => __( 'Check this box if you would like to disable Ultimate Member user\'s cache.', 'ultimate-member' ),
-						),
-						array(
-							'id'        => 'enable_blocks',
-							'type'      => 'checkbox',
-							'label'     => __( 'Enable Gutenberg Blocks', 'ultimate-member' ),
-							'tooltip'   => __( 'Check this box if you would like to use Ultimate Member blocks in Gutenberg editor. Important some themes have the conflicts with Gutenberg editor.', 'ultimate-member' ),
 						),
 						array(
 							'id'        => 'rest_api_version',

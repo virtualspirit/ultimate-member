@@ -126,7 +126,7 @@ if ( ! class_exists( 'UM_Functions' ) ) {
 
 
 		/**
-		 * @return mixed|void
+		 * @return array
 		 */
 		function excluded_taxonomies() {
 			$taxes = array(
@@ -327,7 +327,7 @@ if ( ! class_exists( 'UM_Functions' ) ) {
 
 
 		/**
-		 * @return mixed|void
+		 * @return array
 		 */
 		function cpt_list() {
 			/**

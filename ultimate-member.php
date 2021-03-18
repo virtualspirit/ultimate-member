@@ -22,3 +22,5 @@ define( 'ultimatemember_plugin_name', $plugin_data['Name'] );
 
 require_once 'includes/class-functions.php';
 require_once 'includes/class-init.php';
+
+UM();
