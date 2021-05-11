@@ -1,0 +1,16 @@
+{
+	"apiVersion": 2,
+	"name": "ultimate-member/login-form",
+	"category": "ultimate-member",
+	"editorScript": "um-block-login-form",
+	"attributes": {
+		"redirectType": {
+			"type": "string",
+			"default": ""
+		},
+		"customRedirectURL": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}

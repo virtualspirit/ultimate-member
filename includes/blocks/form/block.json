@@ -1,16 +1,11 @@
 {
-    "apiVersion": 2,
-    "name": "core/block",
-    "category": "reusable",
-    "attributes": {
-    "ref": {
-        "type": "number"
-    }
-    },
-    "supports": {
-        "customClassName": false,
-        "html": false,
-        "inserter": false
-    },
-    "editorStyle": "wp-block-editor"
+	"apiVersion": 2,
+	"name": "ultimate-member/form",
+	"category": "ultimate-member",
+	"editorScript": "um-block-form",
+	"attributes": {
+		"type": {
+			"type": "string"
+		}
+	}
 }
