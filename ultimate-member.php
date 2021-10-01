@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Ultimate Member
+Plugin Name: UM Kexxel
 Plugin URI: http://ultimatemember.com/
 Description: The easiest way to create powerful online communities and beautiful user profiles with WordPress
-Version: 2.2.5
+Version: 1.0.0
 Author: Ultimate Member
 Author URI: http://ultimatemember.com/
 Text Domain: ultimate-member
