@@ -1,0 +1,133 @@
+.accont-contdiv {
+    display: flex;
+    margin-top: 50px;
+}
+.accont-left-contdiv{
+    width: 50%;
+    float: left;
+}
+.accont-left-contdiv{
+    width: 50%;
+    float: right;
+}
+.borderless tr td{
+    border: none;
+    vertical-align: middle;
+    padding: 0;
+}
+.borderless tr td:nth-child(2){
+    width: 60px;
+}
+.account-wholebody {
+    width: 100%;
+    min-height: 700px;
+    height: auto;
+    padding: 100px 150px;
+    background: #000;
+    color: #fff;
+}
+.my-account {
+  color: #FFFFFF;		  
+  font-size: 85px;
+  line-height: 114px;
+  text-align: left;
+  font-weight: 700;
+  padding: 20px 0;
+}
+.nav-tabs .nav-link.active {
+   color: #fff;
+   background-color: transparent;
+   border: none;
+   text-decoration: underline;
+}
+.nav-tabs {
+   border-bottom: none;
+}
+.accound-det-navtab .nav-link {
+    border: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    padding: 30px 50px;
+    text-transform: uppercase;
+}
+.padl-0{
+    padding-left: 0 !important;
+}
+.logout-txt {
+    position: absolute;
+    right: 0;
+    text-transform: uppercase;
+}
+.dettitle {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+.viespan a{
+    color: #FF1900;
+    font-size: 20px;
+    font-weight: 500;
+}
+.clckset {
+    color: #FF1900;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.orde-detsec {
+    margin-top: 30px;
+}
+.orde-det-table-head {
+    background: #fff;
+    color: #000;
+    font-size: 22px;
+    font-weight: 700;
+}
+.orde-det-table{
+    border: 1px solid #fff;
+}
+.orde-det-table tr td{
+    font-size: 18px;
+    padding: 20px;
+    border-top: 1px solid #fff;
+}
+.orde-det-table tr td a{
+    color: #fff;
+}
+.profle-img {
+    width: 200px;
+}
+.profle-imgbox {
+    width: 200px;
+}
+.acc-edit {
+    font-size: 18px;
+    color: #000DFF;
+}
+.acc-edit-icon {
+    margin-right: 5px;
+}
+.accdetails-sec-table tr td{
+    padding: 10px 0;
+    vertical-align: middle;
+}
+.accdetails-sec-table tr td:last-child{
+    text-align: right;
+}
+.accdetails-sec {
+    margin-top: 70px;
+}
+#phone-num-setinput {
+    display: none;
+}
+#comphone-num-setinput{
+    display: none;
+}
+.chang-pictxt{
+    text-decoration: underline;
+    font-size: 20px;
+}

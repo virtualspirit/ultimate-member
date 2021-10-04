@@ -1,194 +1,144 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+<div class="account-wholebody">
+  		<h2 class="account-heading-txt my-account">MY ACCOUNT</h2>
+	    <nav class="accound-det-nav">
+		  <div class="nav nav-tabs accound-det-navtab" id="nav-tab" role="tablist">
+		    <a class="nav-item nav-link active padl-0" data-toggle="tab" href="#nav-myaccount">MY ACCOUNT</a>
+		    <a class="nav-item nav-link" data-toggle="tab" href="#nav-mydetails" role="tab">MY DETAILS</a>
+		    <a class="nav-item nav-link text-right logout-txt"  href="#nav-contact">Logout</a>
+		  </div>
+		</nav>
+		<div class="tab-content account-tabcont">
+		  <div class="tab-pane fade show active" id="nav-myaccount" role="tabpanel">
+		  	<div class="accont-contdiv">
+		  		<div class="accont-left-contdiv">
+		  			<table class="table accont-left-table borderless">					  
+					  <tbody>
+					    <tr>					      
+					      <td><p class="dettitle">Username</p></td>
+					      <td>:</td>
+					      <td><p class="dettitle">bensherman</p></td>
+					    </tr>
+					    <tr>					      
+					      <td><p class="dettitle">Password </p></td>
+					      <td>:</td>
+					      <td><p class="dettitle">********** <span class="viespan"><a href="">(view password)</a></span></p></td>
+					    </tr>
+					    <tr>					      
+					      <td><p class="dettitle">Email </p></td>
+					      <td>:</td>
+					      <td><p class="dettitle">bensherman@schlumberger.com</p></td>
+					    </tr>
+					    <tr>					      
+					      <td><p class="dettitle">Phone number</p> </td>
+					      <td>:</td>
+					      <td><p class="clckset" id="phone-num-set">(Click to set)</p>
+					      	<input type="text" name="" id="phone-num-setinput">
+					      </td>
+					    </tr>
+					    <tr>					      
+					      <td><p class="dettitle">Company phone number</p> </td>
+					      <td>:</td>
+					      <td><p class="clckset" id="comphone-num-set">(Click to set)</p>
+					      	<input type="text" name="" id="comphone-num-setinput">
+					      </td>
+					    </tr>
+					  </tbody>
+					</table>
+		  		</div>
+		  		<div class="accont-right-contdiv">
+		  			<div class="profle-imgbox">
+		  				<img src="change-pic.svg" class="profle-img">
+		  				<p class="text-center">
+		  					<label for="files" class="btn chang-pictxt">Change Picture</label>
+      						<input id="files" style="visibility:hidden;" type="file">
+      					</p>
+		  			</div>
+		  		</div>
+		  	</div>
+		  	<div class="orde-detsec">
+		  		<table class="table orde-det-table text-center">
+				  <thead>
+				    <tr class="orde-det-table-head">
+				      <th scope="col">ORDER ID</th>
+				      <th scope="col">EVENT</th>
+				      <th scope="col">TICKET</th>
+				      <th scope="col">STATUS</th>
+				      <th scope="col">RECEIPT/INVOICE</th>
+				      <th scope="col">EVENT DETAILS</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>				      
+				      <td>#0000013</td>
+				      <td>Negotiate To Win</td>
+				      <td>3+1</td>
+				      <td>Processing</td>
+				      <td>-</td>
+				      <td>-</td>
+				    </tr>
+				    <tr>				      
+				      <td>#0000472</td>
+				      <td>Leadership Series</td>
+				      <td>1</td>
+				      <td>Paid</td>
+				      <td><a href="">Download</a></td>
+				      <td>Passed</td>
+				    </tr>
+				    <tr>				      
+				      <td>#0000472</td>
+				      <td>Leadership Series</td>
+				      <td>1</td>
+				      <td>Paid</td>
+				      <td><a href="">Download</a></td>
+				      <td>Passed</td>
+				    </tr>				    
+				  </tbody>
+				</table>
+		  	</div>
+		  </div>
 
-<div class="um <?php echo esc_attr( $this->get_class( $mode ) ); ?> um-<?php echo esc_attr( $form_id ); ?>">
-
-	<div class="um-form">
-	
-		<form method="post" action="">
-			
-			<?php
-			/**
-			 * UM hook
-			 *
-			 * @type action
-			 * @title um_account_page_hidden_fields
-			 * @description Show hidden fields on account form
-			 * @input_vars
-			 * [{"var":"$args","type":"array","desc":"Account shortcode arguments"}]
-			 * @change_log
-			 * ["Since: 2.0"]
-			 * @usage add_action( 'um_account_page_hidden_fields', 'function_name', 10, 1 );
-			 * @example
-			 * <?php
-			 * add_action( 'um_account_page_hidden_fields', 'my_account_page_hidden_fields', 10, 1 );
-			 * function my_account_page_hidden_fields( $args ) {
-			 *     // your code here
-			 * }
-			 * ?>
-			 */
-			do_action( 'um_account_page_hidden_fields', $args ); ?>
-
-			<div class="um-account-meta radius-<?php echo esc_attr( UM()->options()->get( 'profile_photocorner' ) ); ?> uimob340-show uimob500-show">
-
-				<div class="um-account-meta-img">
-					<a href="<?php echo esc_url( um_user_profile_url() ); ?>"><?php echo get_avatar( um_user( 'ID' ), 120 ); ?></a>
-				</div>
-
-				<div class="um-account-name">
-					<a href="<?php echo esc_url( um_user_profile_url() ); ?>">
-						<?php echo esc_html( um_user( 'display_name' ) ); ?>
-					</a>
-					<div class="um-account-profile-link">
-						<a href="<?php echo esc_url( um_user_profile_url() ); ?>" class="um-link">
-							<?php _e( 'View profile', 'ultimate-member' ); ?>
-						</a>
-					</div>
-				</div>
-
-			</div>
-			
-			<div class="um-account-side uimob340-hide uimob500-hide">
-
-				<div class="um-account-meta radius-<?php echo esc_attr( UM()->options()->get( 'profile_photocorner' ) ); ?>">
-
-					<div class="um-account-meta-img uimob800-hide">
-						<a href="<?php echo esc_url( um_user_profile_url() ); ?>">
-							<?php echo get_avatar( um_user( 'ID' ), 120 ); ?>
-						</a>
-					</div>
-
-					<?php if ( UM()->mobile()->isMobile() ) { ?>
-
-						<div class="um-account-meta-img-b uimob800-show" title="<?php echo esc_attr( um_user( 'display_name' ) ); ?>">
-							<a href="<?php echo esc_url( um_user_profile_url() ); ?>">
-								<?php echo get_avatar( um_user( 'ID' ), 120 ); ?>
-							</a>
-						</div>
-
-					<?php } else { ?>
-
-						<div class="um-account-meta-img-b uimob800-show um-tip-<?php echo is_rtl() ? 'e' : 'w'; ?>" title="<?php echo esc_attr( um_user( 'display_name' ) ); ?>">
-							<a href="<?php echo esc_url( um_user_profile_url() ); ?>">
-								<?php echo get_avatar( um_user( 'ID' ), 120 ); ?>
-							</a>
-						</div>
-
-					<?php } ?>
-
-					<div class="um-account-name uimob800-hide">
-						<a href="<?php echo esc_url( um_user_profile_url() ); ?>">
-							<?php echo um_user( 'display_name', 'html' ); ?>
-						</a>
-						<div class="um-account-profile-link">
-							<a href="<?php echo esc_url( um_user_profile_url() ); ?>" class="um-link">
-								<?php _e( 'View profile', 'ultimate-member' ); ?>
-							</a>
-						</div>
-					</div>
-
-				</div>
-
-				<ul>
-					<?php foreach ( UM()->account()->tabs as $id => $info ) {
-						if ( isset( $info['custom'] ) || UM()->options()->get( "account_tab_{$id}" ) == 1 || $id == 'general' ) { ?>
-
-							<li>
-								<a data-tab="<?php echo esc_attr( $id )?>" href="<?php echo esc_url( UM()->account()->tab_link( $id ) ); ?>" class="um-account-link <?php if ( $id == UM()->account()->current_tab ) echo 'current'; ?>">
-									<?php if ( UM()->mobile()->isMobile() ) { ?>
-										<span class="um-account-icontip uimob800-show" title="<?php echo esc_attr( $info['title'] ); ?>">
-											<i class="<?php echo esc_attr( $info['icon'] ); ?>"></i>
-										</span>
-									<?php } else { ?>
-										<span class="um-account-icontip uimob800-show um-tip-<?php echo is_rtl() ? 'e' : 'w'; ?>" title="<?php echo esc_attr( $info['title'] ); ?>">
-											<i class="<?php echo esc_attr( $info['icon'] ); ?>"></i>
-										</span>
-									<?php } ?>
-
-									<span class="um-account-icon uimob800-hide">
-										<i class="<?php echo esc_attr( $info['icon'] ); ?>"></i>
-									</span>
-									<span class="um-account-title uimob800-hide"><?php echo esc_html( $info['title'] ); ?></span>
-									<span class="um-account-arrow uimob800-hide">
-										<i class="<?php if ( is_rtl() ) { ?>um-faicon-angle-left<?php } else { ?>um-faicon-angle-right<?php } ?>"></i>
-									</span>
-								</a>
-							</li>
-
-						<?php }
-					} ?>
-				</ul>
-			</div>
-			
-			<div class="um-account-main" data-current_tab="<?php echo esc_attr( UM()->account()->current_tab ); ?>">
-			
-				<?php
-				/**
-				 * UM hook
-				 *
-				 * @type action
-				 * @title um_before_form
-				 * @description Show some content before account form
-				 * @input_vars
-				 * [{"var":"$args","type":"array","desc":"Account shortcode arguments"}]
-				 * @change_log
-				 * ["Since: 2.0"]
-				 * @usage add_action( 'um_before_form', 'function_name', 10, 1 );
-				 * @example
-				 * <?php
-				 * add_action( 'um_before_form', 'my_before_form', 10, 1 );
-				 * function my_before_form( $args ) {
-				 *     // your code here
-				 * }
-				 * ?>
-				 */
-				do_action( 'um_before_form', $args );
-
-				foreach ( UM()->account()->tabs as $id => $info ) {
-
-					$current_tab = UM()->account()->current_tab;
-
-					if ( isset( $info['custom'] ) || UM()->options()->get( 'account_tab_' . $id ) == 1 || $id == 'general' ) { ?>
-
-						<div class="um-account-nav uimob340-show uimob500-show">
-							<a href="javascript:void(0);" data-tab="<?php echo esc_attr( $id ); ?>" class="<?php if ( $id == $current_tab ) echo 'current'; ?>">
-								<?php echo esc_html( $info['title'] ); ?>
-								<span class="ico"><i class="<?php echo esc_attr( $info['icon'] ); ?>"></i></span>
-								<span class="arr"><i class="um-faicon-angle-down"></i></span>
-							</a>
-						</div>
-
-						<div class="um-account-tab um-account-tab-<?php echo esc_attr( $id ); ?>" data-tab="<?php echo esc_attr( $id  )?>">
-							<?php $info['with_header'] = true;
-							UM()->account()->render_account_tab( $id, $info, $args ); ?>
-						</div>
-
-					<?php }
-				} ?>
-				
-			</div>
-			<div class="um-clear"></div>
-		</form>
-		
-		<?php
-		/**
-		 * UM hook
-		 *
-		 * @type action
-		 * @title um_after_account_page_load
-		 * @description After account form
-		 * @change_log
-		 * ["Since: 2.0"]
-		 * @usage add_action( 'um_after_account_page_load', 'function_name', 10 );
-		 * @example
-		 * <?php
-		 * add_action( 'um_after_account_page_load', 'my_after_account_page_load', 10 );
-		 * function my_after_account_page_load() {
-		 *     // your code here
-		 * }
-		 * ?>
-		 */
-		do_action( 'um_after_account_page_load' ); ?>
-
+		  <div class="tab-pane fade" id="nav-mydetails" role="tabpanel">
+		  	<div class="nav-mydetails-cont">
+		  		<div class="profle-imgbox">
+		  				<img src="change-pic.svg" class="profle-img">
+		  				<p class="text-center">
+		  					<label for="files" class="btn chang-pictxt">Change Picture</label>
+      						<input id="files" style="visibility:hidden;" type="file">
+      					</p>
+		  		</div>
+		  		<div class="accdetails-sec">
+		  			<table class="table accdetails-sec-table">					  
+					  <tbody>
+					    <tr>					      
+					      <td><p class="dettitle">Name</p></td>
+					      <td><p class="dettitle">Ben Sherman</p></td>
+					      <td><a href="" class="acc-edit"><span class="acc-edit-icon"><i class="fas fa-pen"></i></span>Edit</a></td>
+					    </tr>
+					    <tr>					      
+					      <td><p class="dettitle">Job Title</p></td>
+					      <td><p class="dettitle">Managing Director</p></td>
+					      <td><a href="" class="acc-edit"><span class="acc-edit-icon"><i class="fas fa-pen"></i></span>Edit</a></td>
+					    </tr>
+					    <tr>					      
+					      <td><p class="dettitle">Company</p></td>
+					      <td><p class="dettitle">Schlumberger</p></td>
+					      <td><a href="" class="acc-edit"><span class="acc-edit-icon"><i class="fas fa-pen"></i></span>Edit</a></td>
+					    </tr>
+					    <tr>					      
+					      <td><p class="dettitle">Email</p></td>
+					      <td><p class="dettitle">bensherman@schlumberger.com</p></td>
+					      <td><a href="" class="acc-edit"><span class="acc-edit-icon"><i class="fas fa-pen"></i></span>Edit</a></td>
+					    </tr>
+					    <tr>					      
+					      <td><p class="dettitle">Contact</p></td>
+					      <td><p class="dettitle">+60123456789</p></td>
+					      <td><a href="" class="acc-edit"><span class="acc-edit-icon"><i class="fas fa-pen"></i></span>Edit</a></td>
+					    </tr>					    
+					  </tbody>
+					</table>
+		  		</div>
+		  	</div>
+		  </div>		  
+		</div>
 	</div>
-
-</div>
