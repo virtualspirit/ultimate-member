@@ -34,7 +34,8 @@ if ( ! class_exists( 'um\core\Plugin_Updater' ) ) {
 
 			//update plugin info
 			add_filter( 'pre_set_site_transient_update_plugins', array( &$this, 'check_update' ) );
-
+			add_filter('site_transient_update_plugins', '__return_false');
+			
 			//plugin information info
 			add_filter( 'plugins_api', array( &$this, 'plugin_information' ), 9999, 3 );
 
